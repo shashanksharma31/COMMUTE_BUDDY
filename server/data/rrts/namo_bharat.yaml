@@ -1,0 +1,38 @@
+# NCRTC RRTS (Namo Bharat) Versioned Timetable & Fare Chart
+meta:
+  operator_code: "NCRTC"
+  line_name: "Delhi-Ghaziabad-Meerut RRTS (Namo Bharat)"
+  source_url: "https://ncrtc.in/"
+  operator_deeplink: "https://ncrtc.in/"
+  effective_from: "2025-01-05"
+
+route:
+  route_id: "NCRTC_RRTS_DEL_MEERUT"
+  mode: "rrts"
+  headway_peak_s: 900
+  headway_offpeak_s: 900
+
+edges:
+  - from_station_id: "stn_in_del_anand_vihar_rrts"
+    to_station_id: "stn_in_del_sahibabad_rrts"
+    sequence_no: 1
+    distance_km: 5.6
+    scheduled_travel_s: 300
+
+first_last_trains:
+  - station_id: "stn_in_del_anand_vihar_rrts"
+    direction_station_id: "stn_in_del_sahibabad_rrts"
+    day_type: "weekday"
+    first_train_time: "06:00"
+    last_train_time: "22:00"
+  - station_id: "stn_in_del_anand_vihar_rrts"
+    direction_station_id: "stn_in_del_sahibabad_rrts"
+    day_type: "sunday"
+    first_train_time: "08:00"
+    last_train_time: "22:00"
+
+fares:
+  - from_station_id: "stn_in_del_anand_vihar_rrts"
+    to_station_id: "stn_in_del_sahibabad_rrts"
+    standard_fare_inr: 30
+    premium_fare_inr: 45

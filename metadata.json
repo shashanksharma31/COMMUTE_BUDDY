@@ -1,0 +1,6 @@
+{
+  "name": "CommuteBuddy",
+  "description": "Real-time transit map, route planner, and live departure tracker with a clean Google Maps Android interface.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

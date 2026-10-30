@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">CommuteBuddy</string>
+    <string name="search_placeholder">Search stations, lines, stops</string>
+    <string name="clear_search">Clear search</string>
+    <string name="recenter_map">Recenter map</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
+    <string name="tab_explore">Explore</string>
+    <string name="tab_commute">Go</string>
+    <string name="tab_saved">Saved</string>
+    <string name="tab_updates">Updates</string>
+    <string name="state_loading">Loading transit data...</string>
+    <string name="state_empty_stops">No matching stations found</string>
+    <string name="state_empty_routes">No active routes for this filter</string>
+    <string name="state_empty_saved">No saved places in this category</string>
+    <string name="state_empty_alerts">No active service alerts</string>
+    <string name="state_error">Unable to load live transit data</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_start_route">Start</string>
+    <string name="action_steps">Steps</string>
+    <string name="action_simulate_loading">Loading</string>
+    <string name="action_simulate_error">Error</string>
+    <string name="action_simulate_live">Live</string>
+    <string name="nearby_departures">Nearby departures</string>
+    <string name="suggested_commutes">Suggested trips</string>
+    <string name="saved_commute_places">Saved places</string>
+    <string name="transit_service_alerts">Service advisories</string>
+</resources>

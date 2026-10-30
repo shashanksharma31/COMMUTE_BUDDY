@@ -1,0 +1,237 @@
+{
+  "meta": {
+    "description": "Verified operator metro routes, stop edges, first/last train tables, and exact slab/OD fare charts",
+    "effective_from": "2025-01-01",
+    "source_url": "https://otd.delhi.gov.in/data/staticDMRC/"
+  },
+  "operators": {
+    "DMRC": {
+      "name": "Delhi Metro Rail Corporation",
+      "operator_deeplink": "https://www.delhimetrorail.com/map",
+      "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "effective_from": "2025-01-01"
+    },
+    "BMRCL": {
+      "name": "Bangalore Metro Rail Corporation Limited",
+      "operator_deeplink": "https://english.bmrc.co.in/",
+      "source_url": "https://english.bmrc.co.in/",
+      "effective_from": "2025-01-01"
+    },
+    "HMRL": {
+      "name": "Hyderabad Metro Rail Limited",
+      "operator_deeplink": "https://www.ltmetro.com/fare-chart/",
+      "source_url": "https://www.ltmetro.com/fare-chart/",
+      "effective_from": "2025-01-01"
+    },
+    "CMRL": {
+      "name": "Chennai Metro Rail Limited",
+      "operator_deeplink": "https://chennaimetrorail.org/fare-and-parking-charges/",
+      "source_url": "https://chennaimetrorail.org/fare-and-parking-charges/",
+      "effective_from": "2025-01-01"
+    }
+  },
+  "routes": [
+    {
+      "routeId": "DMRC_YELLOW",
+      "operatorCode": "DMRC",
+      "mode": "metro",
+      "lineName": "Yellow Line",
+      "lineColor": "#FFCC00",
+      "source_url": "https://otd.delhi.gov.in/data/staticDMRC/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "routeId": "DMRC_BLUE",
+      "operatorCode": "DMRC",
+      "mode": "metro",
+      "lineName": "Blue Line",
+      "lineColor": "#0066CC",
+      "source_url": "https://otd.delhi.gov.in/data/staticDMRC/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "routeId": "DMRC_MAGENTA",
+      "operatorCode": "DMRC",
+      "mode": "metro",
+      "lineName": "Magenta Line",
+      "lineColor": "#CC0066",
+      "source_url": "https://otd.delhi.gov.in/data/staticDMRC/",
+      "effective_from": "2025-01-01"
+    }
+  ],
+  "edges": [
+    {
+      "routeId": "DMRC_YELLOW",
+      "fromStationId": "stn_in_del_kashmere_gate_metro",
+      "toStationId": "stn_in_del_new_delhi_metro",
+      "sequenceNo": 1,
+      "distanceKm": 3.6,
+      "scheduledTravelSeconds": 390,
+      "headwayPeakSeconds": 180,
+      "headwayOffpeakSeconds": 300
+    },
+    {
+      "routeId": "DMRC_YELLOW",
+      "fromStationId": "stn_in_del_new_delhi_metro",
+      "toStationId": "stn_in_del_rajiv_chowk_metro",
+      "sequenceNo": 2,
+      "distanceKm": 1.3,
+      "scheduledTravelSeconds": 150,
+      "headwayPeakSeconds": 180,
+      "headwayOffpeakSeconds": 300
+    },
+    {
+      "routeId": "DMRC_YELLOW",
+      "fromStationId": "stn_in_del_rajiv_chowk_metro",
+      "toStationId": "stn_in_del_hauz_khas_metro",
+      "sequenceNo": 3,
+      "distanceKm": 10.8,
+      "scheduledTravelSeconds": 1140,
+      "headwayPeakSeconds": 180,
+      "headwayOffpeakSeconds": 300
+    },
+    {
+      "routeId": "DMRC_YELLOW",
+      "fromStationId": "stn_in_del_hauz_khas_metro",
+      "toStationId": "stn_in_del_millennium_city_centre_metro",
+      "sequenceNo": 4,
+      "distanceKm": 17.5,
+      "scheduledTravelSeconds": 1740,
+      "headwayPeakSeconds": 180,
+      "headwayOffpeakSeconds": 300
+    },
+    {
+      "routeId": "DMRC_MAGENTA",
+      "fromStationId": "stn_in_del_hauz_khas_metro",
+      "toStationId": "stn_in_del_botanical_garden_metro",
+      "sequenceNo": 1,
+      "distanceKm": 15.8,
+      "scheduledTravelSeconds": 1680,
+      "headwayPeakSeconds": 240,
+      "headwayOffpeakSeconds": 360
+    },
+    {
+      "routeId": "DMRC_BLUE",
+      "fromStationId": "stn_in_del_rajiv_chowk_metro",
+      "toStationId": "stn_in_del_botanical_garden_metro",
+      "sequenceNo": 1,
+      "distanceKm": 14.9,
+      "scheduledTravelSeconds": 1620,
+      "headwayPeakSeconds": 210,
+      "headwayOffpeakSeconds": 330
+    },
+    {
+      "routeId": "DMRC_BLUE",
+      "fromStationId": "stn_in_del_rajiv_chowk_metro",
+      "toStationId": "stn_in_del_anand_vihar_metro",
+      "sequenceNo": 2,
+      "distanceKm": 11.4,
+      "scheduledTravelSeconds": 1260,
+      "headwayPeakSeconds": 240,
+      "headwayOffpeakSeconds": 360
+    }
+  ],
+  "firstLastTrains": [
+    {
+      "routeId": "DMRC_YELLOW",
+      "stationId": "stn_in_del_millennium_city_centre_metro",
+      "directionStationId": "stn_in_del_kashmere_gate_metro",
+      "dayType": "weekday",
+      "firstTrainTime": "05:45",
+      "lastTrainTime": "23:00",
+      "source_url": "https://www.delhimetrorail.com/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "routeId": "DMRC_YELLOW",
+      "stationId": "stn_in_del_millennium_city_centre_metro",
+      "directionStationId": "stn_in_del_kashmere_gate_metro",
+      "dayType": "sunday",
+      "firstTrainTime": "06:00",
+      "lastTrainTime": "23:00",
+      "source_url": "https://www.delhimetrorail.com/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "routeId": "DMRC_YELLOW",
+      "stationId": "stn_in_del_rajiv_chowk_metro",
+      "directionStationId": "stn_in_del_millennium_city_centre_metro",
+      "dayType": "weekday",
+      "firstTrainTime": "05:30",
+      "lastTrainTime": "23:30",
+      "source_url": "https://www.delhimetrorail.com/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "routeId": "DMRC_MAGENTA",
+      "stationId": "stn_in_del_hauz_khas_metro",
+      "directionStationId": "stn_in_del_botanical_garden_metro",
+      "dayType": "weekday",
+      "firstTrainTime": "05:40",
+      "lastTrainTime": "23:15",
+      "source_url": "https://www.delhimetrorail.com/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "routeId": "DMRC_BLUE",
+      "stationId": "stn_in_del_rajiv_chowk_metro",
+      "directionStationId": "stn_in_del_botanical_garden_metro",
+      "dayType": "weekday",
+      "firstTrainTime": "05:35",
+      "lastTrainTime": "23:25",
+      "source_url": "https://www.delhimetrorail.com/",
+      "effective_from": "2025-01-01"
+    }
+  ],
+  "fareSlabs": [
+    { "operatorCode": "DMRC", "dayType": "weekday", "minKm": 0, "maxKm": 2, "fareInr": 10, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "weekday", "minKm": 2, "maxKm": 5, "fareInr": 20, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "weekday", "minKm": 5, "maxKm": 12, "fareInr": 30, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "weekday", "minKm": 12, "maxKm": 21, "fareInr": 40, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "weekday", "minKm": 21, "maxKm": 32, "fareInr": 50, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "weekday", "minKm": 32, "maxKm": 200, "fareInr": 60, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "sunday", "minKm": 0, "maxKm": 2, "fareInr": 10, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "sunday", "minKm": 2, "maxKm": 5, "fareInr": 10, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "sunday", "minKm": 5, "maxKm": 12, "fareInr": 20, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "sunday", "minKm": 12, "maxKm": 21, "fareInr": 30, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "sunday", "minKm": 21, "maxKm": 32, "fareInr": 40, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "DMRC", "dayType": "sunday", "minKm": 32, "maxKm": 200, "fareInr": 50, "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure", "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure", "effective_from": "2025-01-01" },
+    { "operatorCode": "CMRL", "dayType": "weekday", "minKm": 0, "maxKm": 2, "fareInr": 10, "operator_deeplink": "https://chennaimetrorail.org/fare-and-parking-charges/", "source_url": "https://chennaimetrorail.org/fare-and-parking-charges/", "effective_from": "2025-01-01" },
+    { "operatorCode": "CMRL", "dayType": "weekday", "minKm": 2, "maxKm": 5, "fareInr": 20, "operator_deeplink": "https://chennaimetrorail.org/fare-and-parking-charges/", "source_url": "https://chennaimetrorail.org/fare-and-parking-charges/", "effective_from": "2025-01-01" },
+    { "operatorCode": "CMRL", "dayType": "weekday", "minKm": 5, "maxKm": 12, "fareInr": 30, "operator_deeplink": "https://chennaimetrorail.org/fare-and-parking-charges/", "source_url": "https://chennaimetrorail.org/fare-and-parking-charges/", "effective_from": "2025-01-01" },
+    { "operatorCode": "CMRL", "dayType": "weekday", "minKm": 12, "maxKm": 21, "fareInr": 40, "operator_deeplink": "https://chennaimetrorail.org/fare-and-parking-charges/", "source_url": "https://chennaimetrorail.org/fare-and-parking-charges/", "effective_from": "2025-01-01" },
+    { "operatorCode": "CMRL", "dayType": "weekday", "minKm": 21, "maxKm": 100, "fareInr": 50, "operator_deeplink": "https://chennaimetrorail.org/fare-and-parking-charges/", "source_url": "https://chennaimetrorail.org/fare-and-parking-charges/", "effective_from": "2025-01-01" }
+  ],
+  "fareOdMatrix": [
+    {
+      "operatorCode": "DMRC",
+      "fromStationId": "stn_in_del_millennium_city_centre_metro",
+      "toStationId": "stn_in_del_botanical_garden_metro",
+      "dayType": "weekday",
+      "fareInr": 60,
+      "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "operatorCode": "DMRC",
+      "fromStationId": "stn_in_del_rajiv_chowk_metro",
+      "toStationId": "stn_in_del_botanical_garden_metro",
+      "dayType": "weekday",
+      "fareInr": 40,
+      "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "operatorCode": "DMRC",
+      "fromStationId": "stn_in_del_rajiv_chowk_metro",
+      "toStationId": "stn_in_del_hauz_khas_metro",
+      "dayType": "weekday",
+      "fareInr": 30,
+      "operator_deeplink": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "source_url": "https://www.delhimetrorail.com/pages/en/fare-structure",
+      "effective_from": "2025-01-01"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "description": "State transport department meter rate cards and road cost parameters per city with national default. All calculated fares carry isEstimate: true and status: estimate.",
+    "effective_from": "2025-01-01",
+    "source_url": "https://transport.delhi.gov.in/sites/default/files/transport_data/auto_taxi_fare_notification.pdf"
+  },
+  "cities": {
+    "DEL": {
+      "cityName": "Delhi NCR",
+      "source_url": "https://transport.delhi.gov.in/",
+      "effective_from": "2025-01-01",
+      "modes": {
+        "auto": {
+          "baseFareInr": 30,
+          "baseDistanceKm": 1.5,
+          "perKmInr": 11,
+          "perMinuteInr": 0.75,
+          "minFareInr": 30
+        },
+        "e_rickshaw": {
+          "baseFareInr": 10,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 8,
+          "perMinuteInr": 0.25,
+          "minFareInr": 10
+        },
+        "bike": {
+          "baseFareInr": 20,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 7,
+          "perMinuteInr": 0.5,
+          "minFareInr": 25
+        },
+        "car": {
+          "baseFareInr": 50,
+          "baseDistanceKm": 2.0,
+          "perKmInr": 16,
+          "perMinuteInr": 1.2,
+          "minFareInr": 60
+        }
+      }
+    },
+    "BLR": {
+      "cityName": "Bengaluru",
+      "source_url": "https://transport.karnataka.gov.in/",
+      "effective_from": "2025-01-01",
+      "modes": {
+        "auto": {
+          "baseFareInr": 30,
+          "baseDistanceKm": 2.0,
+          "perKmInr": 15,
+          "perMinuteInr": 0.5,
+          "minFareInr": 30
+        },
+        "e_rickshaw": {
+          "baseFareInr": 15,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 10,
+          "perMinuteInr": 0.25,
+          "minFareInr": 15
+        },
+        "bike": {
+          "baseFareInr": 25,
+          "baseDistanceKm": 1.5,
+          "perKmInr": 8,
+          "perMinuteInr": 0.5,
+          "minFareInr": 25
+        },
+        "car": {
+          "baseFareInr": 75,
+          "baseDistanceKm": 4.0,
+          "perKmInr": 18,
+          "perMinuteInr": 1.5,
+          "minFareInr": 75
+        }
+      }
+    },
+    "HYD": {
+      "cityName": "Hyderabad",
+      "source_url": "https://www.transport.telangana.gov.in/",
+      "effective_from": "2025-01-01",
+      "modes": {
+        "auto": {
+          "baseFareInr": 25,
+          "baseDistanceKm": 1.5,
+          "perKmInr": 12,
+          "perMinuteInr": 0.5,
+          "minFareInr": 25
+        },
+        "e_rickshaw": {
+          "baseFareInr": 15,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 8,
+          "perMinuteInr": 0.25,
+          "minFareInr": 15
+        },
+        "bike": {
+          "baseFareInr": 20,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 7.5,
+          "perMinuteInr": 0.5,
+          "minFareInr": 20
+        },
+        "car": {
+          "baseFareInr": 55,
+          "baseDistanceKm": 2.0,
+          "perKmInr": 16,
+          "perMinuteInr": 1.2,
+          "minFareInr": 55
+        }
+      }
+    },
+    "MAA": {
+      "cityName": "Chennai",
+      "source_url": "https://tnsta.gov.in/",
+      "effective_from": "2025-01-01",
+      "modes": {
+        "auto": {
+          "baseFareInr": 25,
+          "baseDistanceKm": 1.8,
+          "perKmInr": 12,
+          "perMinuteInr": 0.5,
+          "minFareInr": 25
+        },
+        "e_rickshaw": {
+          "baseFareInr": 15,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 8,
+          "perMinuteInr": 0.25,
+          "minFareInr": 15
+        },
+        "bike": {
+          "baseFareInr": 20,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 7.5,
+          "perMinuteInr": 0.5,
+          "minFareInr": 20
+        },
+        "car": {
+          "baseFareInr": 60,
+          "baseDistanceKm": 2.0,
+          "perKmInr": 17,
+          "perMinuteInr": 1.2,
+          "minFareInr": 60
+        }
+      }
+    },
+    "NATIONAL_DEFAULT": {
+      "cityName": "India National Default",
+      "source_url": "https://morth.nic.in/",
+      "effective_from": "2025-01-01",
+      "modes": {
+        "auto": {
+          "baseFareInr": 28,
+          "baseDistanceKm": 1.5,
+          "perKmInr": 12,
+          "perMinuteInr": 0.6,
+          "minFareInr": 28
+        },
+        "e_rickshaw": {
+          "baseFareInr": 10,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 8,
+          "perMinuteInr": 0.25,
+          "minFareInr": 10
+        },
+        "bike": {
+          "baseFareInr": 20,
+          "baseDistanceKm": 1.0,
+          "perKmInr": 7.5,
+          "perMinuteInr": 0.5,
+          "minFareInr": 20
+        },
+        "car": {
+          "baseFareInr": 55,
+          "baseDistanceKm": 2.0,
+          "perKmInr": 16,
+          "perMinuteInr": 1.2,
+          "minFareInr": 55
+        }
+      }
+    }
+  }
+}

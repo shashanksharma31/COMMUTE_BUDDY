@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "description": "Source truth hierarchy, base weights, timeouts, and circuit breaker configuration",
+    "effective_from": "2025-01-01",
+    "source_url": "https://otd.delhi.gov.in/"
+  },
+  "sources": {
+    "operator_official": {
+      "tier": 1,
+      "baseWeight": 1.0,
+      "timeoutMs": 5000,
+      "maxRetries": 2,
+      "failureThreshold": 5,
+      "resetTimeoutMs": 30000,
+      "dailyQuotaLimit": null
+    },
+    "operator_gtfs": {
+      "tier": 2,
+      "baseWeight": 0.95,
+      "timeoutMs": 5000,
+      "maxRetries": 2,
+      "failureThreshold": 5,
+      "resetTimeoutMs": 30000,
+      "dailyQuotaLimit": null
+    },
+    "licensed_train_primary": {
+      "tier": 3,
+      "baseWeight": 0.9,
+      "timeoutMs": 6000,
+      "maxRetries": 2,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 1000
+    },
+    "licensed_train_secondary": {
+      "tier": 3,
+      "baseWeight": 0.85,
+      "timeoutMs": 6000,
+      "maxRetries": 2,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 1000
+    },
+    "google_routes": {
+      "tier": 4,
+      "baseWeight": 0.8,
+      "timeoutMs": 5000,
+      "maxRetries": 1,
+      "failureThreshold": 3,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 500
+    },
+    "here_transit": {
+      "tier": 4,
+      "baseWeight": 0.78,
+      "timeoutMs": 5000,
+      "maxRetries": 1,
+      "failureThreshold": 3,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 1000
+    },
+    "openrouteservice": {
+      "tier": 4,
+      "baseWeight": 0.82,
+      "timeoutMs": 5000,
+      "maxRetries": 2,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 45000,
+      "dailyQuotaLimit": 2000
+    },
+    "tomtom_traffic": {
+      "tier": 4,
+      "baseWeight": 0.84,
+      "timeoutMs": 4500,
+      "maxRetries": 1,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 45000,
+      "dailyQuotaLimit": 2500
+    },
+    "photon_geocoder": {
+      "tier": 5,
+      "baseWeight": 0.75,
+      "timeoutMs": 4000,
+      "maxRetries": 2,
+      "failureThreshold": 5,
+      "resetTimeoutMs": 30000,
+      "dailyQuotaLimit": 5000
+    },
+    "nominatim_geocoder": {
+      "tier": 5,
+      "baseWeight": 0.78,
+      "timeoutMs": 4500,
+      "maxRetries": 1,
+      "failureThreshold": 3,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 2500
+    },
+    "osm_overpass": {
+      "tier": 5,
+      "baseWeight": 0.7,
+      "timeoutMs": 8000,
+      "maxRetries": 2,
+      "failureThreshold": 3,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 1000
+    },
+    "wikidata": {
+      "tier": 5,
+      "baseWeight": 0.72,
+      "timeoutMs": 5000,
+      "maxRetries": 2,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 45000,
+      "dailyQuotaLimit": 2000
+    },
+    "here_traffic": {
+      "tier": 4,
+      "baseWeight": 0.84,
+      "timeoutMs": 4500,
+      "maxRetries": 1,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 45000,
+      "dailyQuotaLimit": 2500
+    },
+    "open_meteo": {
+      "tier": 3,
+      "baseWeight": 0.88,
+      "timeoutMs": 4500,
+      "maxRetries": 2,
+      "failureThreshold": 4,
+      "resetTimeoutMs": 30000,
+      "dailyQuotaLimit": 5000
+    },
+    "gemini_flash": {
+      "tier": 4,
+      "baseWeight": 0.8,
+      "timeoutMs": 6000,
+      "maxRetries": 1,
+      "failureThreshold": 3,
+      "resetTimeoutMs": 60000,
+      "dailyQuotaLimit": 1500
+    }
+  }
+}

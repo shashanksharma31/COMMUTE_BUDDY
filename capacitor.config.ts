@@ -1,0 +1,23 @@
+import type { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.commutebuddy.app',
+  appName: 'CommuteBuddy',
+  webDir: 'dist',
+  plugins: {
+    StatusBar: {
+      style: 'DARK',
+      backgroundColor: '#ffffff',
+      overlaysWebView: false
+    },
+    SplashScreen: {
+      backgroundColor: '#ffffff',
+      launchShowDuration: 1500,
+      launchAutoHide: true,
+      fadeOutDuration: 200,
+      showSpinner: false
+    }
+  }
+};
+
+export default config;

@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "description": "Indian Railways static schedule & station-code dataset",
+    "source_url": "https://enquiry.indianrail.gov.in/",
+    "effective_from": "2025-01-01"
+  },
+  "schedules": [
+    {
+      "trainNumber": "12004",
+      "trainName": "New Delhi - Lucknow Swarn Shatabdi Express",
+      "fromStationId": "stn_in_del_ndls_rail",
+      "toStationId": "stn_in_del_anvt_rail",
+      "departureSeconds": 22200,
+      "arrivalSeconds": 23700,
+      "travelDurationSeconds": 1500,
+      "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+      "operator_deeplink": "https://www.irctc.co.in/",
+      "source_url": "https://enquiry.indianrail.gov.in/",
+      "effective_from": "2025-01-01"
+    },
+    {
+      "trainNumber": "04408",
+      "trainName": "New Delhi - Ghaziabad EMU Express",
+      "fromStationId": "stn_in_del_ndls_rail",
+      "toStationId": "stn_in_del_anvt_rail",
+      "departureSeconds": 30600,
+      "arrivalSeconds": 32100,
+      "travelDurationSeconds": 1500,
+      "runningDays": ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+      "operator_deeplink": "https://www.irctc.co.in/",
+      "source_url": "https://enquiry.indianrail.gov.in/",
+      "effective_from": "2025-01-01"
+    }
+  ]
+}
