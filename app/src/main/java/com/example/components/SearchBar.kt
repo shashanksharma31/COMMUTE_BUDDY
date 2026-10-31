@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -40,13 +42,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.data.DataLoadState
@@ -97,8 +103,33 @@ fun SearchBar(
             isDropdownOpen = false
             focusedField = FocusedField.NONE
             focusManager.clearFocus()
-            if (tripContext.hasBothPlaces) {
-                isExpanded = false
+            isExpanded = false
+        }
+    }
+
+    fun commitPendingQueryIfNeeded() {
+        val trimmedStart = startQuery.trim()
+        if (trimmedStart.isNotEmpty() && (tripContext.startPlace == null || !tripContext.startPlace!!.name.equals(trimmedStart, ignoreCase = true))) {
+            val candidate = if (focusedField == FocusedField.START && matchedPlaces.isNotEmpty()) {
+                matchedPlaces.first()
+            } else {
+                DelhiPlacesData.searchPlaces(trimmedStart, maxResults = 1, includeFallbackSynthesis = true).firstOrNull()
+            }
+            if (candidate != null) {
+                startQuery = candidate.name
+                tripContext.updateStart(candidate)
+            }
+        }
+        val trimmedEnd = endQuery.trim()
+        if (trimmedEnd.isNotEmpty() && (tripContext.endPlace == null || !tripContext.endPlace!!.name.equals(trimmedEnd, ignoreCase = true))) {
+            val candidate = if (focusedField == FocusedField.END && matchedPlaces.isNotEmpty()) {
+                matchedPlaces.first()
+            } else {
+                DelhiPlacesData.searchPlaces(trimmedEnd, maxResults = 1, includeFallbackSynthesis = true).firstOrNull()
+            }
+            if (candidate != null) {
+                endQuery = candidate.name
+                tripContext.updateEnd(candidate)
             }
         }
     }
@@ -135,10 +166,16 @@ fun SearchBar(
             listState = DataLoadState.LOADING
         }
 
-        // 2. Debounce 120ms and query the 4-API geocoding pipeline (ArcGIS + Nominatim + Photon + Open-Meteo)
+        // 2. Debounce 120ms and query the 4-API geocoding pipeline with location bias from the other selected endpoint
+        val biasPlace = if (focusedField == FocusedField.START) tripContext.endPlace else tripContext.startPlace
         delay(120L)
         try {
-            val remotePlaces = DelhiPlacesData.fetchPlacesFromBackend(trimmedQuery, maxResults = 6)
+            val remotePlaces = DelhiPlacesData.fetchPlacesFromBackend(
+                query = trimmedQuery,
+                maxResults = 6,
+                lat = biasPlace?.lat,
+                lng = biasPlace?.lng
+            )
             if (remotePlaces.isNotEmpty()) {
                 matchedPlaces = remotePlaces
                 listState = DataLoadState.READY
@@ -269,6 +306,7 @@ fun SearchBar(
                     ) {
                         IconButton(
                             onClick = {
+                                commitPendingQueryIfNeeded()
                                 isDropdownOpen = false
                                 focusedField = FocusedField.NONE
                                 focusManager.clearFocus(force = true)
@@ -366,6 +404,17 @@ fun SearchBar(
                                     isDropdownOpen = true
                                     tripContext.setRoutesSheetOpenState(false)
                                 },
+                                onSubmit = {
+                                    commitPendingQueryIfNeeded()
+                                    if (tripContext.endPlace == null) {
+                                        focusedField = FocusedField.END
+                                        isDropdownOpen = true
+                                    } else {
+                                        isDropdownOpen = false
+                                        focusedField = FocusedField.NONE
+                                        focusManager.clearFocus(force = true)
+                                    }
+                                },
                                 testTag = "input_trip_start"
                             )
 
@@ -396,6 +445,17 @@ fun SearchBar(
                                     isDropdownOpen = true
                                     tripContext.setRoutesSheetOpenState(false)
                                 },
+                                onSubmit = {
+                                    commitPendingQueryIfNeeded()
+                                    if (tripContext.startPlace == null) {
+                                        focusedField = FocusedField.START
+                                        isDropdownOpen = true
+                                    } else {
+                                        isDropdownOpen = false
+                                        focusedField = FocusedField.NONE
+                                        focusManager.clearFocus(force = true)
+                                    }
+                                },
                                 testTag = "input_trip_end"
                             )
                         }
@@ -422,6 +482,7 @@ fun SearchBar(
 
                             IconButton(
                                 onClick = {
+                                    commitPendingQueryIfNeeded()
                                     isDropdownOpen = false
                                     focusedField = FocusedField.NONE
                                     focusManager.clearFocus(force = true)
@@ -453,12 +514,14 @@ fun SearchBar(
                 reachByTime = tripContext.reachByTime,
                 availableModes = tripContext.availableModes,
                 onSelectMode = { mode ->
+                    commitPendingQueryIfNeeded()
                     isDropdownOpen = false
                     focusedField = FocusedField.NONE
                     focusManager.clearFocus(force = true)
                     tripContext.selectTravelMode(mode)
                 },
                 onSelectReachByTime = { time ->
+                    commitPendingQueryIfNeeded()
                     isDropdownOpen = false
                     focusedField = FocusedField.NONE
                     focusManager.clearFocus(force = true)
@@ -516,9 +579,12 @@ private fun DirectionInputRow(
     onValueChange: (String) -> Unit,
     onFocus: () -> Unit,
     onClear: () -> Unit,
+    onSubmit: () -> Unit,
     testTag: String
 ) {
     var hadHardwareFocus by remember { mutableStateOf(false) }
+    val focusRequester = remember { FocusRequester() }
+    val showEditableField = hadHardwareFocus || value.isEmpty()
 
     Row(
         modifier = Modifier
@@ -536,12 +602,18 @@ private fun DirectionInputRow(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null
-            ) { onFocus() }
+            ) {
+                onFocus()
+                runCatching { focusRequester.requestFocus() }
+            }
             .padding(start = 12.dp, end = if (value.isNotEmpty()) 4.dp else 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .clipToBounds()
+                .padding(end = 4.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             if (value.isEmpty()) {
@@ -552,7 +624,7 @@ private fun DirectionInputRow(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
-            } else if (!isFocused) {
+            } else if (!showEditableField) {
                 Text(
                     text = value,
                     style = MaterialTheme.typography.bodyMedium,
@@ -567,9 +639,15 @@ private fun DirectionInputRow(
                 singleLine = true,
                 textStyle = MaterialTheme.typography.bodyMedium.copy(color = MapsTextPrimary),
                 cursorBrush = SolidColor(MapsAccentBlue),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                keyboardActions = KeyboardActions(
+                    onSearch = { onSubmit() },
+                    onDone = { onSubmit() }
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .alpha(if (isFocused || value.isEmpty()) 1f else 0f)
+                    .focusRequester(focusRequester)
+                    .alpha(if (showEditableField) 1f else 0f)
                     .onFocusChanged { state ->
                         if (state.isFocused && !hadHardwareFocus) {
                             onFocus()
@@ -595,3 +673,4 @@ private fun DirectionInputRow(
         }
     }
 }
+

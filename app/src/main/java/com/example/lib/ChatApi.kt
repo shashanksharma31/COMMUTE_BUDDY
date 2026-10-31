@@ -252,7 +252,15 @@ suspend fun streamChatMessage(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        runCatching { Log.w(TAG, "Gemini stream fallback to verified transit advisor: ${e.message}") }
+        runCatching { Log.w(TAG, "Gemini stream fallback to REST / verified transit advisor: ${e.message}") }
+    }
+
+    val restReply = callDirectGeminiRestIfConfigured(prompt)
+    if (!restReply.isNullOrBlank()) {
+        withContext(Dispatchers.Main) {
+            onPartialUpdate(restReply)
+        }
+        return@withContext restReply
     }
 
     val fallbackReply = buildDeterministicTransitReply(message, effectiveContext)
@@ -294,11 +302,52 @@ suspend fun sendMessage(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        runCatching { Log.w(TAG, "Firebase AI call fell back to verified transit advisor: ${e.message}") }
+        runCatching { Log.w(TAG, "Firebase AI call fell back to REST / verified transit advisor: ${e.message}") }
+    }
+
+    val restReply = callDirectGeminiRestIfConfigured(prompt)
+    if (!restReply.isNullOrBlank()) {
+        return@withContext restReply
     }
 
     buildDeterministicTransitReply(message, effectiveContext)
 }
+
+private fun callDirectGeminiRestIfConfigured(prompt: String): String? = runCatching {
+    val apiKey = com.example.BuildConfig.GEMINI_API_KEY.trim()
+    if (apiKey.isEmpty() || apiKey.startsWith("YOUR_") || apiKey.startsWith("AQ.")) return null
+    val urlStr = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$apiKey"
+    val conn = (java.net.URL(urlStr).openConnection() as java.net.HttpURLConnection).apply {
+        requestMethod = "POST"
+        connectTimeout = 5000
+        readTimeout = 8000
+        doOutput = true
+        setRequestProperty("Content-Type", "application/json")
+    }
+    val payload = JSONObject().apply {
+        put(
+            "contents",
+            org.json.JSONArray().put(
+                JSONObject().put(
+                    "parts",
+                    org.json.JSONArray().put(JSONObject().put("text", prompt))
+                )
+            )
+        )
+    }
+    conn.outputStream.bufferedWriter().use { it.write(payload.toString()) }
+    if (conn.responseCode != 200) return null
+    val respBody = conn.inputStream.bufferedReader().use { it.readText() }
+    val root = JSONObject(respBody)
+    val text = root.optJSONArray("candidates")
+        ?.optJSONObject(0)
+        ?.optJSONObject("content")
+        ?.optJSONArray("parts")
+        ?.optJSONObject(0)
+        ?.optString("text", "")
+        ?.trim()
+    text?.takeIf { it.isNotEmpty() }
+}.getOrNull()
 
 internal fun buildDeterministicTransitReply(
     message: String,
@@ -317,19 +366,33 @@ internal fun buildDeterministicTransitReply(
 
     if (route == null) {
         val (parsedStart, parsedEnd) = extractPlacesFromQuestion(message)
-        if (parsedStart != null) {
-            val metroRegion = TransitAvailabilityApi.resolveMetroNetworkRegion(parsedStart)
+        val anchor = startPlace ?: endPlace ?: parsedStart
+        if (anchor != null) {
+            val metroRegion = TransitAvailabilityApi.resolveMetroNetworkRegion(anchor)
+            val busOp = TransitAvailabilityApi.resolveLocalBusOperator(anchor, parsedEnd ?: anchor, false)
             val metroNote = if (metroRegion != null) {
-                "$metroRegion is operational in ${parsedStart.area}"
+                "$metroRegion is operational in ${anchor.area}"
             } else {
-                "Metro is not available in ${parsedStart.area} (use Indian Railways, ${TransitAvailabilityApi.resolveLocalBusOperator(parsedStart, parsedEnd ?: parsedStart, false)}, Auto, or Ola/Uber Cabs)"
+                "Metro is not operational in ${anchor.area}; available local modes are $busOp, Indian Railways, shared e-rickshaws/autos, and Ola/Uber cabs"
             }
-            return "For ${parsedStart.name}${if (parsedEnd != null) " to ${parsedEnd.name}" else ""}: $metroNote. Select both origin and destination in the search bar to view live verified routes, durations in hr/min, and Local vs Ola/Uber fare comparisons."
+            return "For ${anchor.name}${if (parsedEnd != null) " to ${parsedEnd.name}" else ""}: $metroNote. Select both origin and destination in the top search bar to calculate live road distance, platform numbers, and exact Local vs Ola/Uber fares."
         }
-        return "Select a start and destination anywhere in India (for example, Mathura Junction to Prateek Grand City, Ghaziabad or Mathura to Vrindavan) to verify city transport availability, Indian Railways platforms, live traffic, and Local vs Ola/Uber fares."
+        return when {
+            q.contains("available") || q.contains("mode") || q.contains("metro") ->
+                "CommuteBuddy verifies transport mode availability per city: Metro is enabled only in cities with an operational Metro network (such as Delhi-NCR, Mumbai, Bengaluru, Hyderabad, Chennai, Kolkata, Jaipur, Lucknow, Agra, Pune, Ahmedabad, and Kochi) and automatically hidden in non-Metro cities like Mathura, Vrindavan, Varanasi, and Chandigarh. Enter your start and destination above to see verified modes for your route."
+            q.contains("price") || q.contains("cost") || q.contains("fare") || q.contains("ola") || q.contains("uber") ->
+                "Local public transit (State/City Bus ₹10–₹50, Metro ₹10–₹60, shared auto/e-rickshaw ₹15–₹40) typically saves 65% to 80% compared to door-to-door Ola/Uber Mini & Auto fares. Select a start and destination above to compare exact Local vs Ola/Uber fares for your distance."
+            q.contains("miss") || q.contains("next") || q.contains("connection") ->
+                "Urban Metro lines run every 3 to 6 minutes, city/UPSRTC/DTC buses run every 10 to 20 minutes, and shared autos/Ola-Uber cabs are available outside all major railway junctions and bus stands. Select your start and destination above for route-specific transfer buffers."
+            q.contains("leave") || q.contains("time") || q.contains("when") ->
+                "Set your start, destination, and optional 'Reach by' target time in the mode chip bar to calculate your exact recommended departure time with a 10-minute station transfer buffer."
+            else ->
+                "Select a start and destination anywhere in India (for example, Mathura Junction to Mathura New Bus Stand or Shri Krishna Janmasthan to Prem Mandir, Vrindavan) to verify city transport availability, Indian Railways platforms, live traffic, and Local vs Ola/Uber fares."
+        }
     }
 
     val durationStr = CommuteFormatters.formatDuration(route.durationSeconds)
+    val distStr = CommuteFormatters.formatDistanceKm(route.distanceKm)
     val chainStr = route.steps.joinToString(" -> ") { it.mode.label }
     val leaveBy = CommuteFormatters.formatLeaveBy(context.reachByTime, route.minutes)
     val availNote = availability?.let {
@@ -342,10 +405,10 @@ internal fun buildDeterministicTransitReply(
 
     return when {
         q.contains("available") || q.contains("mode") || q.contains("metro") -> {
-            "$availNote Recommended ${context.vehicle.label} route from $startName to $endName takes $durationStr via $chainStr. ${route.localFareDisplay} (${route.olaUberFareDisplay}). ${route.trafficAnalysis}."
+            "$availNote Recommended ${context.vehicle.label} route from $startName to $endName ($distStr) takes $durationStr via $chainStr. ${route.localFareDisplay} (${route.olaUberFareDisplay}). ${route.trafficAnalysis}."
         }
         q.contains("price") || q.contains("cost") || q.contains("fare") || q.contains("ola") || q.contains("uber") || q.contains("cheap") -> {
-            "For $startName to $endName ($durationStr), ${route.localFareDisplay} while ${route.olaUberFareDisplay}. The multi-modal ${route.label.display} option ($chainStr) balances both travel time and total cost. $availNote"
+            "For $startName to $endName ($distStr, $durationStr), ${route.localFareDisplay} while ${route.olaUberFareDisplay}. The multi-modal ${route.label.display} option ($chainStr) balances both travel time and total cost. $availNote"
         }
         q.contains("miss") || q.contains("next") || q.contains("frequency") -> {
             val nextFreq = if (availability?.metroSingleModeAvailable == true) {
@@ -356,14 +419,15 @@ internal fun buildDeterministicTransitReply(
             "If you miss the current connection on the $durationStr ${route.label.display} route ($chainStr), $nextFreq. ${route.localFareDisplay}. ${route.olaUberFareDisplay}."
         }
         q.contains("safe") || q.contains("night") -> {
-            "This $durationStr route from $startName to $endName uses main transit corridors with monitored stations and verified stops. Late at night, prefer pre-booked Ola/Uber cabs (${route.olaUberFareDisplay}) from the pickup zone instead of walking."
+            "This $durationStr ($distStr) route from $startName to $endName uses main transit corridors with monitored stations and verified stops. Late at night, prefer pre-booked Ola/Uber cabs (${route.olaUberFareDisplay}) from the pickup zone instead of walking."
         }
         q.contains("leave") || q.contains("time") || q.contains("when") -> {
             val leaveNote = leaveBy ?: "Depart now to allow a 10 min platform transfer buffer"
-            "$leaveNote for your $durationStr trip from $startName to $endName via $chainStr. ${route.localFareDisplay} (${route.olaUberFareDisplay}). ${route.trafficAnalysis}."
+            "$leaveNote for your $durationStr ($distStr) trip from $startName to $endName via $chainStr. ${route.localFareDisplay} (${route.olaUberFareDisplay}). ${route.trafficAnalysis}."
         }
         else -> {
-            "Recommended ${context.vehicle.label} route from $startName to $endName takes $durationStr (${route.distanceKm} km) via $chainStr with ${route.transfers} transfers. ${route.localFareDisplay} (${route.olaUberFareDisplay}). $availNote"
+            "Recommended ${context.vehicle.label} route from $startName to $endName takes $durationStr ($distStr) via $chainStr with ${route.transfers} transfers. ${route.localFareDisplay} (${route.olaUberFareDisplay}). $availNote"
         }
     }
 }
+

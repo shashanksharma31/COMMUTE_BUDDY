@@ -364,9 +364,7 @@ fun TripContextProvider(
     LaunchedEffect(start, end, vehicle, reachBy, searchCount) {
         if (start != null && end != null && searchCount > 0) {
             try {
-                val isSamePlace = start.id == end.id ||
-                    (start.name.equals(end.name, ignoreCase = true) &&
-                        DelhiPlacesData.haversineMeters(start.lat, start.lng, end.lat, end.lng) < 40.0)
+                val isSamePlace = DelhiPlacesData.isSamePhysicalPlace(start, end)
                 if (isSamePlace) {
                     holder.emptyRoutesMessage = "Start and destination are the same place. Choose two different locations."
                     holder.onSearchSuccess(emptyList())

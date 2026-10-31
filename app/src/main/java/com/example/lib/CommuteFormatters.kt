@@ -49,6 +49,15 @@ object CommuteFormatters {
         }
     }
 
+    fun formatDistanceKm(distanceKm: Double): String {
+        val safeKm = distanceKm.coerceAtLeast(0.1)
+        return when {
+            safeKm < 1.0 -> "${(safeKm * 1000).roundToInt().coerceAtLeast(100)} m"
+            safeKm < 10.0 -> String.format(Locale.US, "%.1f km", safeKm)
+            else -> "${safeKm.roundToInt()} km"
+        }
+    }
+
     // Formats "Saves ₹20, adds 8 min vs fastest" (or "adds 1 hr 15 min vs fastest" if >= 60 min)
     fun formatVsFastest(selected: Route, allRoutes: List<Route>): String {
         val fastest = allRoutes.find { it.label == RouteLabel.FASTEST }

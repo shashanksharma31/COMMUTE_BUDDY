@@ -214,5 +214,21 @@ class ExampleUnitTest {
         val customB = DelhiPlacesData.searchPlaces("Keshav Dev Nagar Mathura", includeFallbackSynthesis = true).first()
         val customSeparation = DelhiPlacesData.haversineMeters(customA.lat, customA.lng, customB.lat, customB.lng)
         assertTrue("Two custom sub-locations must have distinct coordinates (> 300m apart, was $customSeparation)", customSeparation > 300.0)
+
+        // 5. Mathura New Bus Stand vs Mathura Old Bus Stand must be strictly distinguished
+        val newBus = DelhiPlacesData.searchPlaces("Mathura New Bus Stand", includeFallbackSynthesis = false)
+        assertTrue(newBus.isNotEmpty())
+        assertTrue(newBus.first().name.contains("New Bus Stand", ignoreCase = true))
+
+        val oldBus = DelhiPlacesData.searchPlaces("Mathura Old Bus Stand", includeFallbackSynthesis = false)
+        assertTrue(oldBus.isNotEmpty())
+        assertTrue(oldBus.first().name.contains("Old Bus Stand", ignoreCase = true))
+
+        // 6. Canonical station deduplication recognizes "Mathura Junction Railway Station" and "Mathura Junction"
+        assertEquals(
+            DelhiPlacesData.normalizePlaceNameForDedup("Mathura Junction Railway Station"),
+            DelhiPlacesData.normalizePlaceNameForDedup("Mathura Junction")
+        )
     }
 }
+

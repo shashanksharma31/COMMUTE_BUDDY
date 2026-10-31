@@ -476,9 +476,22 @@ object TransitAvailabilityApi {
                 val routes = root.optJSONArray("routes") ?: return@runCatching null
                 val first = routes.optJSONObject(0) ?: return@runCatching null
 
-                val distMeters = first.optDouble("distance", 0.0)
-                val durSec = first.optDouble("duration", 0.0).roundToInt()
-                if (distMeters <= 0.0 || durSec <= 0) return@runCatching null
+                val rawDistMeters = first.optDouble("distance", 0.0)
+                val rawDurSec = first.optDouble("duration", 0.0).roundToInt()
+                if (rawDistMeters <= 0.0 || rawDurSec <= 0) return@runCatching null
+
+                val straightMeters = DelhiPlacesData.haversineMeters(start.lat, start.lng, end.lat, end.lng)
+                // Guard against OSRM snapping two off-road Indian landmarks to the same highway node
+                val distMeters = if (straightMeters > 120.0 && rawDistMeters < straightMeters * 1.05) {
+                    straightMeters * 1.26
+                } else {
+                    rawDistMeters
+                }
+                val durSec = if (distMeters > rawDistMeters) {
+                    max(rawDurSec, (distMeters / 8.5).roundToInt())
+                } else {
+                    rawDurSec
+                }
 
                 val coordsArr = first.optJSONObject("geometry")?.optJSONArray("coordinates")
                 val pts = ArrayList<Pair<Double, Double>>()

@@ -195,6 +195,127 @@ object DelhiPlacesData {
             stationId = "stn_in_mtj_rail",
             aliases = listOf("Barsana", "Radha Rani Temple Barsana")
         ),
+        DelhiPlace(
+            id = "plc_in_mtj_bhuteshwar_rail",
+            name = "Bhuteshwar Railway Station, Mathura",
+            area = "Bhuteshwar Tiraha, Mathura, Uttar Pradesh",
+            category = "Railway Station",
+            lat = 27.4962,
+            lng = 77.6641,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Bhuteshwar", "Bhuteshwar Station", "Bhuteshwar Mahadev Temple")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_cantt_rail",
+            name = "Mathura Cantt Railway Station (MRT)",
+            area = "Civil Lines / Cantonment, Mathura, Uttar Pradesh",
+            category = "Railway Station",
+            lat = 27.4828,
+            lng = 77.6869,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Mathura Cantt", "MRT Station", "Cantonment Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_dholi_pyau",
+            name = "Dholi Pyau, Mathura",
+            area = "Station Road, Dholi Pyau, Mathura, Uttar Pradesh",
+            category = "Locality",
+            lat = 27.4820,
+            lng = 77.6742,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Dholi Pyau", "Dholi Pyau Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_masani",
+            name = "Masani Tiraha, Mathura",
+            area = "Masani Link Road, Mathura, Uttar Pradesh",
+            category = "Locality",
+            lat = 27.5112,
+            lng = 77.6725,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Masani", "Masani Chauraha", "Masani Road Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_krishna_nagar",
+            name = "Krishna Nagar, Mathura",
+            area = "Govardhan Road, Krishna Nagar, Mathura, Uttar Pradesh",
+            category = "Locality",
+            lat = 27.4968,
+            lng = 77.6562,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Krishna Nagar Mathura", "Krishna Nagar")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_radhika_vihar",
+            name = "Radhika Vihar, Mathura",
+            area = "NH-19 / Krishna Nagar, Mathura, Uttar Pradesh",
+            category = "Locality",
+            lat = 27.4995,
+            lng = 77.6488,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Radhika Vihar", "Radhika Vihar Phase 1", "Radhika Vihar Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_bsa_college",
+            name = "BSA College, Mathura",
+            area = "Gaushala Road, Civil Lines, Mathura, Uttar Pradesh",
+            category = "University",
+            lat = 27.4918,
+            lng = 77.6712,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("BSA College", "Babu Shivnath Agrawal College", "BSA Engineering College Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_goverdhan_chauraha",
+            name = "Govardhan Chauraha (NH-19), Mathura",
+            area = "NH-19 Delhi-Agra Highway, Mathura, Uttar Pradesh",
+            category = "Bus Stop",
+            lat = 27.4952,
+            lng = 77.6442,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Govardhan Chauraha", "Goverdhan Chauraha Mathura", "Mandi Chauraha Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_shri_om_hospital",
+            name = "Shri Om Hospital, Mathura",
+            area = "NH-19 / Bhuteshwar Road, Mathura, Uttar Pradesh",
+            category = "Hospital",
+            lat = 27.4926,
+            lng = 77.6634,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Shri Om Hospital", "Om Hospital Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_saxena_hospital",
+            name = "Saxena Hospital, Mathura",
+            area = "Sonkh Road / Civil Lines, Mathura, Uttar Pradesh",
+            category = "Hospital",
+            lat = 27.4864,
+            lng = 77.6665,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Saxena Hospital", "Saxena Hospital Mathura")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_sheetal_regency",
+            name = "Sheetal Regency Hotel, Mathura",
+            area = "Janmabhoomi Link Road, Mathura, Uttar Pradesh",
+            category = "Landmark",
+            lat = 27.5016,
+            lng = 77.6682,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Sheetal Regency", "Sheetal Regency Hotel")
+        ),
+        DelhiPlace(
+            id = "plc_in_mtj_refinery",
+            name = "Mathura Refinery & Township (IOCL)",
+            area = "NH-19, Baad, Mathura, Uttar Pradesh",
+            category = "Business Hub",
+            lat = 27.4125,
+            lng = 77.6852,
+            stationId = "stn_in_mtj_rail",
+            aliases = listOf("Mathura Refinery", "Refinery Nagar Mathura", "Baad Mathura")
+        ),
+
 
         // --- Ghaziabad, Siddharth Vihar, Indirapuram & Trans-Hindon ---
         DelhiPlace(
@@ -1026,7 +1147,7 @@ object DelhiPlacesData {
         "hospital", "college", "university", "institute", "school", "mall", "market",
         "sector", "block", "pocket", "tower", "phase", "gate", "road", "marg",
         "nagar", "vihar", "colony", "enclave", "extension", "ext", "park", "chowk",
-        "city", "new", "old", "shri", "sri", "st", "dr", "india", "khand", "the"
+        "city", "shri", "sri", "st", "dr", "india", "khand", "the"
     )
 
     private val CITY_NAMES = setOf(
@@ -1037,6 +1158,59 @@ object DelhiPlacesData {
         "patna", "kochi", "ernakulam", "uttar", "pradesh", "haryana", "maharashtra",
         "karnataka", "rajasthan", "punjab", "gujarat", "bihar", "kerala"
     )
+
+    /**
+     * Normalizes a place name for duplicate detection so variants like
+     * `"Mathura Junction Railway Station"` and `"Mathura Junction"` map to the same canonical key.
+     */
+    fun normalizePlaceNameForDedup(name: String): String {
+        return name.lowercase()
+            .substringBefore(",")
+            .replace(Regex("\\([^)]*\\)"), " ")
+            .replace(
+                Regex("\\b(railway|station|metro|bus|stand|stop|isbt|junction|jn|terminal|terminus|interchange|shri|sri|the)\\b"),
+                " "
+            )
+            .replace(Regex("[^a-z0-9 ]"), " ")
+            .trim()
+            .replace(Regex("\\s+"), " ")
+    }
+
+    /**
+     * Returns true if two `DelhiPlace` instances represent the exact same physical place or station.
+     */
+    fun isSamePhysicalPlace(a: DelhiPlace, b: DelhiPlace): Boolean {
+        if (a.id == b.id) return true
+        val dist = haversineMeters(a.lat, a.lng, b.lat, b.lng)
+        if (dist < 40.0 && a.name.equals(b.name, ignoreCase = true)) return true
+        val normA = normalizePlaceNameForDedup(a.name)
+        val normB = normalizePlaceNameForDedup(b.name)
+        return dist < 450.0 && normA.isNotEmpty() && normA == normB && a.category == b.category
+    }
+
+    private fun extractSpecificLandmarkTokens(query: String): List<String> {
+        val tokens = query.lowercase()
+            .split(" ", ",", "-", "/", "(", ")")
+            .map { it.trim() }
+            .filter { it.length >= 2 }
+        return tokens.filter { it !in GENERIC_PLACE_STOPWORDS && it !in CITY_NAMES }
+    }
+
+    private fun isGenericCityCentroidResult(candidateName: String, specificLandmarkTokens: List<String>): Boolean {
+        if (specificLandmarkTokens.isEmpty()) return false
+        val candTokens = candidateName.lowercase()
+            .substringBefore(",")
+            .split(" ", "-", "/", "(", ")")
+            .map { it.trim() }
+            .filter { it.length >= 2 }
+        if (candTokens.isNotEmpty() && candTokens.all { it in CITY_NAMES }) {
+            return true
+        }
+        val matchesAnyLandmark = specificLandmarkTokens.any { token ->
+            candidateName.lowercase().contains(token)
+        }
+        return !matchesAnyLandmark && candTokens.any { it in CITY_NAMES }
+    }
 
     /**
      * Strict local search against the verified hub list.
@@ -1255,11 +1429,11 @@ object DelhiPlacesData {
         // 2. Query ArcGIS World Geocoder, Nominatim, Photon, and Open-Meteo in PARALLEL
         val (arcGisMatches, nominatimMatches, photonMatches, openMeteoMatches) = coroutineScope {
             val arcGisDeferred = async {
-                runCatching { fetchFromArcGisDirect(trimmed, maxResults = maxResults) }
+                runCatching { fetchFromArcGisDirect(trimmed, maxResults = maxResults, lat = lat, lng = lng) }
                     .getOrDefault(emptyList())
             }
             val nominatimDeferred = async {
-                runCatching { fetchFromNominatimSearchDirect(trimmed, maxResults = maxResults) }
+                runCatching { fetchFromNominatimSearchDirect(trimmed, maxResults = maxResults, lat = lat, lng = lng) }
                     .getOrDefault(emptyList())
             }
             val photonDeferred = async {
@@ -1288,21 +1462,23 @@ object DelhiPlacesData {
             if (
                 item.name.equals(trimmed, ignoreCase = true) ||
                 item.name.startsWith(trimmed, ignoreCase = true) ||
-                item.aliases.any { it.equals(trimmed, ignoreCase = true) }
+                item.aliases.any { it.equals(trimmed, ignoreCase = true) || it.startsWith(trimmed, ignoreCase = true) }
             ) {
                 combined.add(item)
             }
         }
 
-        // Merge ArcGIS + Nominatim + Photon + Open-Meteo + remaining local matches with coordinate deduplication
+        // Merge ArcGIS + Nominatim + Photon + Open-Meteo + remaining local matches with canonical deduplication
         val allCandidates = arcGisMatches + nominatimMatches + photonMatches + localMatches + openMeteoMatches
         for (item in allCandidates) {
             if (combined.size >= maxResults) break
+            val itemNorm = normalizePlaceNameForDedup(item.name)
             val isDuplicate = combined.any { existing ->
-                existing.name.equals(item.name, ignoreCase = true) &&
-                    haversineMeters(existing.lat, existing.lng, item.lat, item.lng) < 350.0 ||
-                    (haversineMeters(existing.lat, existing.lng, item.lat, item.lng) < 120.0 &&
-                        existing.name.substringBefore(",").trim().equals(item.name.substringBefore(",").trim(), ignoreCase = true))
+                val dist = haversineMeters(existing.lat, existing.lng, item.lat, item.lng)
+                val existingNorm = normalizePlaceNameForDedup(existing.name)
+                (existing.name.equals(item.name, ignoreCase = true) && dist < 450.0) ||
+                    (dist < 450.0 && existingNorm.isNotEmpty() && existingNorm == itemNorm) ||
+                    (dist < 140.0 && existing.name.substringBefore(",").trim().equals(item.name.substringBefore(",").trim(), ignoreCase = true))
             }
             if (!isDuplicate) {
                 combined.add(item)
@@ -1330,11 +1506,15 @@ object DelhiPlacesData {
      */
     private fun fetchFromArcGisDirect(
         trimmed: String,
-        maxResults: Int
+        maxResults: Int,
+        lat: Double? = null,
+        lng: Double? = null
     ): List<DelhiPlace> {
+        val specificLandmarkTokens = extractSpecificLandmarkTokens(trimmed)
         val encodedQ = URLEncoder.encode(trimmed, "UTF-8")
+        val locationParam = if (lat != null && lng != null) "&location=$lng,$lat" else ""
         val urlStr =
-            "$ARCGIS_FIND_URL?SingleLine=$encodedQ&countryCode=IND&maxLocations=10&outFields=Match_addr,PlaceName,Place_addr,City,Subregion,Region,Type&f=json"
+            "$ARCGIS_FIND_URL?SingleLine=$encodedQ&countryCode=IND&maxLocations=10&outFields=Match_addr,PlaceName,Place_addr,City,Subregion,Region,Type&f=json$locationParam"
 
         val conn = (URL(urlStr).openConnection() as HttpURLConnection).apply {
             requestMethod = "GET"
@@ -1374,6 +1554,8 @@ object DelhiPlacesData {
                 matchAddr.isNotBlank() -> matchAddr.substringBefore(",").trim()
                 else -> continue
             }
+
+            if (isGenericCityCentroidResult(name, specificLandmarkTokens)) continue
 
             val rawAreaParts = listOfNotNull(
                 placeAddr.takeIf { it.isNotBlank() && !it.equals(name, ignoreCase = true) },
@@ -1428,6 +1610,7 @@ object DelhiPlacesData {
         trimmed: String,
         maxResults: Int
     ): List<DelhiPlace> {
+        val specificLandmarkTokens = extractSpecificLandmarkTokens(trimmed)
         val encodedQ = URLEncoder.encode(trimmed, "UTF-8")
         val urlStr = "$OPEN_METEO_GEOCODE_URL?name=$encodedQ&count=10&language=en&format=json"
 
@@ -1456,6 +1639,7 @@ object DelhiPlacesData {
 
             val name = item.optString("name", "").trim()
             if (name.isEmpty()) continue
+            if (isGenericCityCentroidResult(name, specificLandmarkTokens)) continue
 
             val admin3 = item.optString("admin3", "").trim()
             val admin2 = item.optString("admin2", "").trim()
@@ -1547,6 +1731,7 @@ object DelhiPlacesData {
         lat: Double?,
         lng: Double?
     ): List<DelhiPlace> {
+        val specificLandmarkTokens = extractSpecificLandmarkTokens(trimmed)
         val encodedQ = URLEncoder.encode(trimmed, "UTF-8")
         val biasParams = if (lat != null && lng != null) "&lat=$lat&lon=$lng" else ""
         val urlStr = "$PHOTON_BASE_URL?q=$encodedQ&limit=12&lang=en$biasParams"
@@ -1586,6 +1771,7 @@ object DelhiPlacesData {
                 .ifEmpty { props.optString("city", "") }
                 .trim()
             if (name.isEmpty()) continue
+            if (isGenericCityCentroidResult(name, specificLandmarkTokens)) continue
 
             val osmKey = props.optString("osm_key", "").lowercase()
             val osmVal = props.optString("osm_value", "").lowercase()
@@ -1634,10 +1820,16 @@ object DelhiPlacesData {
 
     private fun fetchFromNominatimSearchDirect(
         trimmed: String,
-        maxResults: Int
+        maxResults: Int,
+        lat: Double? = null,
+        lng: Double? = null
     ): List<DelhiPlace> {
+        val specificLandmarkTokens = extractSpecificLandmarkTokens(trimmed)
         val encodedQ = URLEncoder.encode(trimmed, "UTF-8")
-        val urlStr = "$NOMINATIM_SEARCH_URL?q=$encodedQ&countrycodes=in&format=jsonv2&addressdetails=1&limit=10&accept-language=en"
+        val viewboxParam = if (lat != null && lng != null) {
+            "&viewbox=${lng - 0.5},${lat + 0.5},${lng + 0.5},${lat - 0.5}"
+        } else ""
+        val urlStr = "$NOMINATIM_SEARCH_URL?q=$encodedQ&countrycodes=in&format=jsonv2&addressdetails=1&limit=10&accept-language=en$viewboxParam"
         val conn = (URL(urlStr).openConnection() as HttpURLConnection).apply {
             requestMethod = "GET"
             connectTimeout = 2800
@@ -1659,6 +1851,7 @@ object DelhiPlacesData {
                 displayName.substringBefore(",").trim()
             }
             if (rawName.isEmpty()) continue
+            if (isGenericCityCentroidResult(rawName, specificLandmarkTokens)) continue
             val addr = item.optJSONObject("address")
             val areaParts = listOfNotNull(
                 addr?.optString("neighbourhood", "")?.takeIf { it.isNotBlank() && !it.equals(rawName, true) },

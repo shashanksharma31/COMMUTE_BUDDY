@@ -297,7 +297,7 @@ fun ChatBar(
             border = BorderStroke(1.dp, MapsBorder),
             modifier = modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.64f)
+                .fillMaxHeight(0.54f)
                 .shadow(elevation = 2.dp, shape = topShape, clip = false)
                 .testTag("chat_panel_expanded")
         ) {

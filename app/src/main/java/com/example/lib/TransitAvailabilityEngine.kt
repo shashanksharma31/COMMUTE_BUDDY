@@ -702,9 +702,20 @@ object TransitAvailabilityEngine {
         if (root.optString("code") != "Ok") return null
         val route0 = root.optJSONArray("routes")?.optJSONObject(0) ?: return null
 
-        val distMeters = max(100, route0.optDouble("distance", 1000.0).roundToInt())
+        val straightMeters = DelhiPlacesData.haversineMeters(start.lat, start.lng, end.lat, end.lng)
+        val rawDistMeters = max(100, route0.optDouble("distance", 1000.0).roundToInt())
+        val distMeters = if (straightMeters > 120.0 && rawDistMeters < straightMeters * 1.05) {
+            (straightMeters * 1.26).roundToInt()
+        } else {
+            rawDistMeters
+        }
         val distKm = ((distMeters / 1000.0) * 10.0).roundToInt() / 10.0
-        val durationSec = max(60, route0.optDouble("duration", 300.0).roundToInt())
+        val rawDurationSec = max(60, route0.optDouble("duration", 300.0).roundToInt())
+        val durationSec = if (distMeters > rawDistMeters) {
+            max(rawDurationSec, (distMeters / 8.5).roundToInt())
+        } else {
+            rawDurationSec
+        }
 
         // Extract top highway/road names from legs[0].steps
         val roadNames = LinkedHashSet<String>()
